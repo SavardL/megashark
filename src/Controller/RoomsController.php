@@ -35,12 +35,18 @@ class RoomsController extends AppController
      */
     public function view($id = null)
     {
-        $room = $this->Rooms->get($id, [
-            'contain' => ['Showtimes']
-        ]);
-        $this->Rooms->Showtimes->find();
+        $room = $this->Rooms->get($id);
+        
+        $showtimesTab=$this->Rooms->Showtimes
+        ->find()
+        ->select(['id','movie_id','room_id','start','end'])
+        ->where(['room_id'=> $room->id])
+        ->contain(['Rooms','Movies']);
+        
+        $showtimes =$this->Rooms->Showtimes->find();
         $this->set('room', $room);
         $this->set('_serialize', ['room']);
+        $this->set('showtimes',$showtimesTab);
     }
 
     /**
