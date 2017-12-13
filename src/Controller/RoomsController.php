@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\I18n\Time;
 
 /**
  * Rooms Controller
@@ -37,13 +38,19 @@ class RoomsController extends AppController
     {
         $room = $this->Rooms->get($id);
         
+        $date_deb = new Time();
+        $date_fin = new Time();
+        
+        $date_fin->modify('+7 days');
+                
         $showtimesTab=$this->Rooms->Showtimes
         ->find()
-        ->select(['id','movie_id','room_id','start','end'])
         ->where(['room_id'=> $room->id])
+        ->where(['start >' => $date_deb])
+        ->where(['start <' => $date_fin])
         ->contain(['Rooms','Movies']);
         
-        $showtimes =$this->Rooms->Showtimes->find();
+        
         $this->set('room', $room);
         $this->set('_serialize', ['room']);
         $this->set('showtimes',$showtimesTab);

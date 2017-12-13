@@ -59,11 +59,16 @@
             <?php foreach ($showtimes as $showtime): ?>
             <tr>
                 <td><?= $this->Number->format($showtime->id) ?></td>
-                <td><?= $showtime->has('movie') ? $this->Html->link($showtime->movie->name, ['controller' => 'Movies', 'action' => 'view', $showtime->movie->id]) : '' ?></td>
+                <td><?=($showtime->movie->name.' ') ?> </td> 
+                <td><?= h($showtime->room_id) ?></td>
                 <td><?= h($showtime->start) ?></td>
                 <td><?= h($showtime->end) ?></td>
                 <td><?= h($showtime->created) ?></td>
                 <td><?= h($showtime->modified) ?></td>
+                
+                
+                
+                
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $showtime->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $showtime->id]) ?>
