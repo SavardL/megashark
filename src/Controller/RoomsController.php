@@ -54,6 +54,16 @@ class RoomsController extends AppController
         $this->set('room', $room);
         $this->set('_serialize', ['room']);
         $this->set('showtimes',$showtimesTab);
+        
+        
+        $items = [ 'lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche'];
+        $showtimesByDayNumber=[];
+        //foreach($showtimes as $showtime){
+            //$showtimesByDayNumber[$showtime->start->format('N')][]=$showtime;
+        //}
+        
+        $this->set('showtimeByDayNumber', $showtimeByDayNumber);
+        $this->set('items', $items);
     }
 
     /**

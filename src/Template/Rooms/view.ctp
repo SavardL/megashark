@@ -41,39 +41,30 @@
     </table>
      
 <div class="showtimes index large-9 medium-8 columns content">
-    <h3><?= __('Showtimes') ?></h3>
+    <h3><?= __('Planning de la semaine') ?></h3>
     <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>
-                <th scope="col"><?= $this->Paginator->sort('id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('movie_id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('room_id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('start') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('end') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('created') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('Lundi') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('Mardi') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('Mercredi') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('Jeudi') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('Vendredi') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('Samedi') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('Dimanche') ?></th>
             </tr>
         </thead>
         <tbody>
+        <tr>
+            <?php foreach ($items as $item): ?>
+                <td></td>
+            <?php endforeach ?>
             <?php foreach ($showtimes as $showtime): ?>
             <tr>
-                <td><?= $this->Number->format($showtime->id) ?></td>
-                <td><?=($showtime->movie->name.' ') ?> </td> 
-                <td><?= h($showtime->room_id) ?></td>
+                <td><?= $showtime->has('movie') ? $this->Html->link($showtime->movie->name, ['controller' => 'Movies', 'action' => 'view', $showtime->movie->id]) : '' ?></td> 
                 <td><?= h($showtime->start) ?></td>
                 <td><?= h($showtime->end) ?></td>
-                <td><?= h($showtime->created) ?></td>
-                <td><?= h($showtime->modified) ?></td>
-                
-                
-                
-                
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $showtime->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $showtime->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $showtime->id], ['confirm' => __('Are you sure you want to delete # {0}?', $showtime->id)]) ?>
-                </td>
+
             </tr>
             <?php endforeach; ?>
         </tbody>
